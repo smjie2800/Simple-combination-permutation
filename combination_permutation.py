@@ -49,17 +49,6 @@ def combination(length, elements):
                 index_cur -= 1
                 length_relative += 1
 
-            is_complete = True
-            length_relative = length
-            for index in indexes:
-                if index + length_relative != elements_len:
-                    is_complete = False
-                    break
-                length_relative -= 1
-
-            if is_complete:
-                break
-
             length_relative = length - 1
             for i in range(1, length):
                 if indexes[i] + length_relative == elements_len:
@@ -89,27 +78,24 @@ def combination_sets(sets):
     :return:
     """
     combinations = []
-    length = len(sets)
+    length = len(sets) + 1
     indexes = [0 for i in range(length)]
     combinations_set = [[] for i in range(length)]
 
-    i = 0
+    i = 1
     for _set in sets:
         combinations_set[i].extend(combination(_set.get("length"), _set.get("set")))
         i += 1
 
-    print(combinations_set)
-
-    combination_first_set_length = len(combinations_set[0])
     index_tail = len(indexes) - 1
     combination_last_set_length = len(combinations_set[index_tail])
 
-    while indexes[0] < combination_first_set_length:
+    while indexes[0] < 1:
         while indexes[index_tail] < combination_last_set_length:
 
-            i = 0
+            i = 1
             _combination = []
-            for index in indexes:
+            for index in indexes[1:]:
                 _combination.extend(combinations_set[i][index])
                 i += 1
             combinations.append(_combination)
@@ -127,41 +113,4 @@ def combination_sets(sets):
 
             index_cur -= 1
 
-        is_complete = True
-        for index in indexes:
-            if index != 0:
-                is_complete = False
-
-        if is_complete:
-            break
-
     return combinations
-
-
-# print(len(combination(6, ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'])))
-# print(combination_sets([{"length": 2, "set": ['a1', 'a2', 'a3']}, {"length": 1, "set": ['b1', 'b2', 'b3']},
-#                         {"length": 1, "set": ['c1', 'c2', 'c3']}]))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
