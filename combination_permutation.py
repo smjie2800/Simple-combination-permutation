@@ -114,3 +114,74 @@ def combination_sets(sets):
             index_cur -= 1
 
     return combinations
+
+
+def permutation(length, elements):
+    """
+    Generate elements permutation
+
+    example:
+       Elements is ['a', 'b', 'c', 'd', 'e'], permutation length is 3
+       Generate permutation is [['a', 'b', 'c'], ['a', 'b', 'd'], ['a', 'b', 'e'], ['a', 'c', 'b'], ['a', 'c', 'd'],
+                               ['a', 'c', 'e']...]
+
+    :param length: one permutation length
+    :param elements: is list, used for permutation. like ['a', 'b', 'c', 'd', 'e']
+    :return: permutations
+    """
+    if length <= 0:
+        return []
+
+    elif length >= len(elements):
+        return elements
+
+    else:
+        permutations = []
+        indexes = [0 for i in range(length+1)]
+        values_set = [[] for i in range(length+1)]
+
+        i = 0
+        for values in values_set[1:]:
+            values.extend(elements[i:])
+            i += 1
+
+        index_tail = len(indexes) - 1
+        values_last_set_length = len(values_set[index_tail])
+
+        while indexes[0] < 1:
+            while indexes[index_tail] < values_last_set_length:
+
+                i = 1
+                _permutation = []
+                for index in indexes[1:]:
+                    _permutation.append(values_set[i][index])
+                    i += 1
+                permutations.append(_permutation)
+
+                indexes[index_tail] += 1
+
+            indexes[index_tail] -= 1
+            index_cur = index_tail
+            while index_cur >= 0:
+                if indexes[index_cur] + 1 == len(values_set[index_cur]):
+                    indexes[index_cur] = 0
+
+                else:
+                    indexes[index_cur] += 1
+
+                    values_allow = elements.copy()
+                    i = 1
+                    for index in indexes[1:index_cur+1]:
+                        values_allow.remove(values_set[i][index])
+                        i += 1
+
+                    for values in values_set[index_cur+1:]:
+                        values.clear()
+                        values.extend(values_allow)
+                        values_allow.remove(values[0])
+
+                    break
+
+                index_cur -= 1
+
+    return permutations

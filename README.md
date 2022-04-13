@@ -18,3 +18,10 @@ This is a simple combination and permutation functions
       result: [['a1', 'a2', 'b1', 'c1'], ['a1', 'a2', 'b1', 'c2'], ['a1', 'a2', 'b1', 'c3'], ['a1', 'a2', 'b2', 'c1'], 
               ['a1', 'a2', 'b2', 'c2'], ['a1', 'a2', 'b2', 'c3']...]
   ```
+- use permutation(length, elements) to generate permutations
+  ```bash
+  example:
+      permutation(3, ['a', 'b', 'c', 'd', 'e'])
+  result:
+      [['a', 'b', 'c'], ['a', 'b', 'd'], ['a', 'b', 'e'], ['a', 'c', 'b'], ['a', 'c', 'd'], ['a', 'c', 'e']...] 
+  ```
